@@ -1,0 +1,28 @@
+a.link {
+  @apply text-sm font-bold text-gray-800;
+}
+a.link:hover {
+  @apply underline;
+}
+
+button {
+	--btn-move: 6px;
+  @apply text-sm rounded-full relative;
+  box-shadow: 0 0 0 theme("colors.gray.700");
+  transition: all 0.25s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+/* button::before {
+  content: "";
+  @apply w-full h-full rounded-full bg-gray-800 absolute top-0 left-0 -z-10;
+} */
+
+button:hover {
+	transform: translateY(calc(-1 * var(--btn-move)));
+  box-shadow: 0 var(--btn-move) 0 theme("colors.primary.800");
+}
+button:active {
+	--btn-move: 4px;
+}
+button > * {
+  @apply scale-100;
+}

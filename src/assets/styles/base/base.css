@@ -1,7 +1,37 @@
 body {
+  @apply bg-gray-50 text-gray-800;
+
+  @apply font-body text-base;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
+}
+
+@layer base {
+  button {
+    @apply text-sm rounded-full;
+  }
+}
+
+.stripe-bg {
+  --clr-soft: theme("colors.neutral.50");
+  --clr-hard: theme("colors.neutral.100");
+  background: repeating-linear-gradient(
+    to right,
+    var(--clr-soft),
+    var(--clr-soft) 5px,
+    var(--clr-hard) 5px,
+    var(--clr-hard) 8px
+  );
+}
+.stripe-bg--primary {
+  --clr-soft: theme("colors.primary.50");
+  --clr-hard: theme("colors.primary.100");
+}
+.stripe-bg--secondary {
+  --clr-soft: theme("colors.secondary.50");
+  --clr-hard: theme("colors.secondary.100");
+}
+.stripe-bg--gray {
+  --clr-soft: theme("colors.gray.50");
+  --clr-hard: theme("colors.gray.100");
 }
