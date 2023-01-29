@@ -1,5 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import "./App.css";
+import supabase from "./config/supabase";
 
 interface Pastry {
   name: string;
@@ -11,9 +12,28 @@ interface Pastry {
 }
 
 function App() {
+  const [errors, setErrors] = useState<string[]>();
+  const [pastries, setPastries] = useState<any[]>();
 
+  useEffect(() => {
+    const fetchPastries = async () => {
+      const { data, error } = await supabase.from("pastries").select();
 
-  const [count, setCount] = useState(0);
+      if (error) {
+        setErrors(["Could not fetch pastries"]);
+        setPastries([]);
+      }
+      if (data) {
+        setPastries(data);
+        setErrors([]);
+      }
+
+      console.log("pasticcini: ", pastries);
+      console.log("errori: ", errors);
+    };
+
+    fetchPastries();
+  }, []);
 
   return (
     <Fragment>
@@ -58,7 +78,7 @@ function App() {
         </div>
       </div>
 
-      <div className="bg-primary-200">
+      <div className="bg-neutral-200">
         <div className="container p-8 grid place-content-center place-items-start gap-4 ">
           <p className="text-neutral-700">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse
